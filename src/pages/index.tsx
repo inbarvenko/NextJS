@@ -1,43 +1,69 @@
 import Link from "next/link";
-import { getAllNews } from "./api/strapiApi";
+import { getAllNews } from "../api/strapiApi";
 import { NewsDataType } from "@/types/news";
 
 type Props = {
-  sportNews: NewsDataType[];
-  politicalNews: NewsDataType[];
+  allNews: NewsDataType[];
 };
 
 export const getStaticProps = async () => {
-  const politicalNews = await getAllNews('politics');
-  const sportNews = await getAllNews('news');
+  const allNews = await getAllNews();
 
-  return { props: { sportNews, politicalNews } };
+  return { props: { allNews } };
 };
 
 export default function Home(props: Props) {
-  const { sportNews, politicalNews } = props;
+  const { allNews } = props;
+
+  const sportNews = allNews
+    .filter((news) => news.attributes.type == "sport")
+    .splice(0, 4);
+  const politicNews = allNews
+    .filter((news) => news.attributes.type == "politic")
+    .splice(0, 4);
 
   return (
     <main>
-      <p>Новости к этому часу</p>
+      <h1>Новости к этому часу</h1>
+      <hr />
 
-      <Link href="/sport">Спортивные новости</Link>
-      <ul>
+      <Link className="text-dec-none" href="/sport">
+        <h2 className="title">Спортивные новости</h2>
+      </Link>
+      <div className="news">
         {sportNews.map((news) => (
-          <li key={`sportNews--${news.id}`}>
-            <Link href={`/sport/${news.id}`}>{news.attributes.name}</Link>
-          </li>
+          <article className="item" key={`sportNews--${news.id}`}>
+            <Link className="text-dec-none" href={`/sport/${news.id}`}>
+              <h3 className="name">{news.attributes.main[0].name}</h3>
+              <p className="descr">{news.attributes.main[0].description}</p>
+            </Link>
+          </article>
         ))}
-      </ul>
+      </div>
 
-      <Link href="/political">Политические новости</Link>
-      <ul>
-        {politicalNews.map((news) => (
-          <li key={`politicalNews--${news.id}`}>
-            <Link href={`/political/${news.id}`}>{news.attributes.name}</Link>
-          </li>
+      <Link className="text-dec-none" href="/sport">
+        <h3 className="title">Читать далее ...</h3>
+      </Link>
+
+      <hr />
+
+      <Link className="text-dec-none" href="/politic">
+        <h2 className="title">Политические новости</h2>
+      </Link>
+      <div className="news">
+        {politicNews.map((news) => (
+          <article className="item" key={`politicNews--${news.id}`}>
+            <Link className="text-dec-none" href={`/politic/${news.id}`}>
+              <h3 className="name">{news.attributes.main[0].name}</h3>
+              <p className="descr">{news.attributes.main[0].description}</p>
+            </Link>
+          </article>
         ))}
-      </ul>
+      </div>
+      <Link className="text-dec-none" href="/politic">
+        <h3 className="title">Читать далее ...</h3>
+      </Link>
+      <hr />
     </main>
   );
 }

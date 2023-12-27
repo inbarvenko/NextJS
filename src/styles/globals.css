@@ -14,14 +14,93 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  padding: 20px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-a {
-  color: black;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 20px;
+}
+
+.name {
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+
+.news {
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  padding-bottom: 30px;
+}
+
+section {
+  background-color: #fff;
+  padding: 40px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+article {
+  margin-bottom: 20px;
+}
+
+.text-dec-none {
+  text-decoration: none;
+}
+
+.date {
+  padding-bottom: 20px;
+}
+
+.descr {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  color: #4f4d4d;
+  text-align: justify;
+  font-size: 14px;
+}
+
+.item {
+  width: 40%;
+  height: 180px;
+
+  background-color: rgb(224, 239, 253);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: #333;
+  border-style: groove;
+}
+
+h2 {
+  color: #333;
+}
+
+h3 {
+  color: #383434;
+  font-size: 16px;
+  margin-top: 10px;
+
+  text-overflow: clip;
   text-decoration: none;
 }
 
@@ -29,13 +108,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
-
-ul {
-  background-color: red;
-}
-
-li {
-  color: blue;
-  font-size: 14px;
 }
